@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Home,
@@ -30,9 +30,13 @@ export default function WorkspaceShell({ children }) {
       useApp(),
     path = usePathname(),
     router = useRouter();
+  const scrollRef = useRef(null);
   useEffect(() => {
     if (ready && !session) router.replace("/login");
   }, [ready, session, router]);
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [path]);
   if (!ready || !session) return <Loading />;
   const active = (href) =>
     href === "/"
@@ -53,14 +57,14 @@ export default function WorkspaceShell({ children }) {
     else go();
   };
   return (
-    <div className="min-h-dvh">
+    <div className="workspace-shell">
       <a
         href="#main-content"
         className="sr-only fixed left-4 top-4 z-50 rounded-xl bg-primary px-4 py-3 text-white focus:not-sr-only"
       >
         Lewati ke konten
       </a>
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[248px] flex-col border-r bg-card lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[248px] flex-col overflow-y-auto border-r bg-card lg:flex">
         <div className="px-7 pb-10 pt-8">
           <Brand />
         </div>
@@ -110,7 +114,11 @@ export default function WorkspaceShell({ children }) {
           </Button>
         </div>
       </aside>
-      <div className="lg:pl-[248px]">
+      <div
+        ref={scrollRef}
+        data-workspace-scroll
+        className="workspace-scroll lg:pl-[248px]"
+      >
         <header className="rounded-b-[26px] bg-[linear-gradient(145deg,#101b3d,#1d3470)] px-5 pt-[22px] pb-[26px] text-white sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1400px]">
             <div className="flex items-center justify-between">

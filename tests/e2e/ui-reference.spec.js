@@ -36,7 +36,9 @@ test("audit tema referensi: palet, default terang, header, field, dan responsive
   }
   await page.getByRole("button", { name: "Masuk ke aplikasi" }).click();
   await expect(page.locator("#main-content")).toBeVisible();
-  await expect(page.locator('[data-sonner-toast]')).toHaveCount(0, {timeout:10000});
+  await expect(page.locator("[data-sonner-toast]")).toHaveCount(0, {
+    timeout: 10000,
+  });
   expect(
     await page
       .locator("header")
