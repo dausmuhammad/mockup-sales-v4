@@ -102,6 +102,11 @@ input::-webkit-inner-spin-button {
   -webkit-overflow-scrolling: touch;
   scroll-padding-bottom: calc(108px + env(safe-area-inset-bottom));
 }
+@media (display-mode: standalone) {
+  .workspace-scroll > header {
+    padding-top: calc(22px + env(safe-area-inset-top));
+  }
+}
 .page-enter {
   animation: enter 0.25s ease-out;
 }

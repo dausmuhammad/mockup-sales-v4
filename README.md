@@ -26,6 +26,14 @@ npm run start
 
 Tidak membutuhkan environment variable atau akun layanan eksternal.
 
+## Pasang ke Home Screen iPhone
+
+Buka URL production melalui Safari, pilih Share → Add to Home Screen, aktifkan **Open as Web App** bila opsi tersebut tersedia, lalu Add. Jalankan melalui ikon SalesFlow di Home Screen untuk mode standalone tanpa toolbar browser. Tab Safari biasa tetap menampilkan kontrol browser.
+
+Manifest memakai `display: standalone`, `start_url: /`, dan `scope: /`. Metadata Apple serta ikon PNG 180/192/512 px disediakan. Jika ikon sudah dibuat sebelum konfigurasi ini tersedia, pasang ulang shortcut-nya. Jangan memilih penghapusan data browser untuk langkah ini; data demo masih disimpan lokal. Penyimpanan sesi/data pada mode web app iOS bisa berbeda dari tab browser, jadi mungkin perlu login dan mengisi data demo lagi.
+
+Konfigurasi Home Screen tidak menambahkan dukungan offline; aplikasi tetap memerlukan koneksi untuk memuat source/route yang belum tersedia. Tampilan standalone native iOS harus dikonfirmasi pada perangkat fisik; pengujian otomatis memeriksa manifest, metadata Apple, dan file ikon yang disajikan.
+
 ## Teknologi
 
 - Next.js **15.5.29**, App Router, React 19, JavaScript/JSX.
